@@ -10,7 +10,8 @@ import {
 import { PeopleService } from './people.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
-import { PersonEntity } from './entities/person.entity';
+import { FindPeopleResponseDto } from './dto/find-people-response.dto';
+import { FindPersonResponseDto } from './dto/find-person-response.dto';
 
 @Controller('person')
 export class PeopleController {
@@ -22,13 +23,13 @@ export class PeopleController {
   }
 
   @Get()
-  async findAll(): Promise<{ pessoas: PersonEntity[] }> {
+  async findAll(): Promise<FindPeopleResponseDto> {
     const pessoas = await this.peopleService.findAll();
     return { pessoas };
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<{ pessoa: PersonEntity }> {
+  async findOne(@Param('id') id: string): Promise<FindPersonResponseDto> {
     const pessoa = await this.peopleService.findOne(+id);
     return { pessoa };
   }
